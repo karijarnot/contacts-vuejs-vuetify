@@ -1,0 +1,8 @@
+.classpath
+.project
+contacts.db
+log.txt
+.settings/
+node_modules/
+target/
+src/main/resources/static/built/
