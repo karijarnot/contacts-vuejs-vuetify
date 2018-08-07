@@ -1,7 +1,12 @@
-import Vue from 'vue'
-import App from './App'
+import Vue from 'vue';
+import App from './App.vue';
+import store from './store';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'toastr/build/toastr.min.css';
+
+
 new Vue({
-  el: '#app',
-  template: '<App/>',
-  components: { App }
-})
+  render: h => h(App),
+  store,
+}).$mount('#app');

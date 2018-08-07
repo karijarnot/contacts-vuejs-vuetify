@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="container-fluid">
     <h1>{{ msg }}</h1>
     <table class="table table-striped">
     	<thead>
@@ -8,39 +8,73 @@
     			<th>Last Name</th>
     			<th>Phone Number</th>
     			<th>Email</th>
+    			<th></th>
+    			<th></th>
     		</tr>
     	</thead>
     	<tbody>
-    		<tr v-for="contact in contactEntities">
+    		<tr v-for="contact in contactEntities" :key="contact.id" >
     			<td>{{contact.firstName}}</td>
     			<td>{{contact.lastName}}</td>
     			<td>{{contact.phoneNumber}}</td>
     			<td>{{contact.email}}</td>
+    			<td><button class="btn btn-primary btn-sm" @click="selectContactForUpdate(contact)">Update</button></td>
+    			<td><button class="btn btn-danger btn-sm" @click="deleteContact(contact.id)">Delete</button></td>
      		</tr>
      	</tbody>
      </table>
+     <div class="text-center">
+		<button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#addModal">Add Contact</button>
+		<button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#searchModal">Search Contacts</button>
+		<button type="button" class="btn btn-primary m-1" @click="clearSearch()">Display All Contacts</button>
+	</div>
+	<AddContactModal />
+	<SearchContactsModal />
+	<UpdateContactModal />
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+
+import { mapActions } from 'vuex';
+import AddContactModal from './components/AddContactModal.vue';
+import SearchContactsModal from './components/SearchContactsModal.vue';
+import UpdateContactModal from './components/UpdateContactModal.vue';
+import toastr from 'toastr';
 
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Contacts',
-      contactEntities: null
+      msg: 'Contacts'
     }
   },
+  components: {
+	  AddContactModal,
+	  SearchContactsModal,
+	  UpdateContactModal
+  },
+  computed: {
+	  contactEntities() {
+		  return this.$store.state.contactEntities;
+	  }
+  },
+  methods: {
+	  ...mapActions(['deleteContactEntity', 'getContactEntities', 'updateSelectedContact'] ),
+	  deleteContact: function(id) {
+		  this.deleteContactEntity(id);
+		  toastr.success('Contact deleted');
+	  },
+	  clearSearch: function() {
+		  this.$store.dispatch('getContactEntities');
+	  },
+	  selectContactForUpdate: function(contactEntity) {
+		  this.$store.commit('updateSelectedContact', Object.assign({}, contactEntity));
+		  $("#updateModal").modal('show');
+	  }
+  },
   created: function () {
-	  	axios.get('/contacts-rest/').then(response => {
-			const contactEntities = response.data;
-			console.log(contactEntities);
-			this.contactEntities = contactEntities;
-		}).catch(error => {
-			throw(error);
-		});
+	  this.$store.dispatch('getContactEntities');
   }
 }
 </script>
