@@ -31,6 +31,7 @@
 	<AddContactModal />
 	<SearchContactsModal />
 	<UpdateContactModal />
+	<ContactsTable />
   </div>
 </template>
 
@@ -40,6 +41,7 @@ import { mapActions } from 'vuex';
 import AddContactModal from './components/AddContactModal.vue';
 import SearchContactsModal from './components/SearchContactsModal.vue';
 import UpdateContactModal from './components/UpdateContactModal.vue';
+import ContactsTable from './components/ContactsTable.vue';
 import toastr from 'toastr';
 
 export default {
@@ -52,7 +54,8 @@ export default {
   components: {
 	  AddContactModal,
 	  SearchContactsModal,
-	  UpdateContactModal
+	  UpdateContactModal,
+	  ContactsTable
   },
   computed: {
 	  contactEntities() {

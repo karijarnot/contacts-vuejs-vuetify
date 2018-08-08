@@ -11,19 +11,19 @@
 			<form @submit.prevent="addContact(contactEntity)">
 			<div class="modal-body">
 				<div class="form-group">
-					<label class="control-label" htmlFor="addFirstName">First Name</label> 
+					<label class="control-label" for="addFirstName">First Name</label> 
 					<input type="text" class="form-control" id="addFirstName" name="firstName" v-model="contactEntity.firstName" required />
 				</div>
 				<div class="form-group">
-					<label class="control-label" htmlFor="addLastName">Last Name</label> 
+					<label class="control-label" for="addLastName">Last Name</label> 
 					<input type="text" class="form-control" id="addLastName" name="lastName" v-model="contactEntity.lastName" required />
 				</div>
 				<div class="form-group">
-					<label class="control-label" htmlFor="addPhoneNumber">Phone Number</label> 
+					<label class="control-label" for="addPhoneNumber">Phone Number</label> 
 					<input type="text" class="form-control" id="addPhoneNumber" name="phoneNumber" v-model="contactEntity.phoneNumber" />
 				</div>
 				<div class="form-group">
-					<label class="control-label" htmlFor="addEmail">Email</label> 
+					<label class="control-label" for="addEmail">Email</label> 
 					<input type="text" class="form-control" id="addEmail" name="email" v-model="contactEntity.email" />
 				</div>
 			</div>

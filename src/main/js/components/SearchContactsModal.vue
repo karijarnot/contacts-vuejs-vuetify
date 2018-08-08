@@ -10,11 +10,11 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<label class="control-label" htmlFor="findFirstName">First Name</label> 
+					<label class="control-label" for="findFirstName">First Name</label> 
 					<input type="text" class="form-control" id="findFirstName" name="firstName" v-model="contactEntity.firstName" />
 				</div>
 				<div class="form-group">
-					<label class="control-label" htmlFor="findLastName">Last Name</label> 
+					<label class="control-label" for="findLastName">Last Name</label> 
 					<input type="text" class="form-control" id="findLastName" name="lastName" v-model="contactEntity.lastName" />
 				</div>
 			</div>

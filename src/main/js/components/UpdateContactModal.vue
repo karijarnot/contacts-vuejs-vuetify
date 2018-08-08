@@ -12,19 +12,19 @@
 			<form @submit.prevent="updateContact(selectedContact)">
 			<div class="modal-body">
 				<div class="form-group">
-					<label class="control-label" htmlFor="updateFirstName">First Name</label> 
+					<label class="control-label" for="updateFirstName">First Name</label> 
 					<input type="text" class="form-control" id="updateFirstName" name="firstName" v-model="selectedContact.firstName" required />
 				</div>
 				<div class="form-group">
-					<label class="control-label" htmlFor="updateLastName">Last Name</label> 
+					<label class="control-label" for="updateLastName">Last Name</label> 
 					<input type="text" class="form-control" id="updateLastName" name="lastName" v-model="selectedContact.lastName" required />
 				</div>
 				<div class="form-group">
-					<label class="control-label" htmlFor="updatePhoneNumber">Phone Number</label> 
+					<label class="control-label" for="updatePhoneNumber">Phone Number</label> 
 					<input type="text" class="form-control" id="updatePhoneNumber" name="phoneNumber" v-model="selectedContact.phoneNumber"  />
 				</div>
 				<div class="form-group">
-					<label class="control-label" htmlFor="updateEmail">Email</label> 
+					<label class="control-label" for="updateEmail">Email</label> 
 					<input type="text" class="form-control" id="updateEmail" name="email" v-model="selectedContact.email" />
 				</div>
 			</div>
