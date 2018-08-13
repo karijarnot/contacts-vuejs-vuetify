@@ -70,6 +70,8 @@
 <v-data-table
 :headers="headers"
 :items="contactEntities"
+:pagination.sync="pagination"
+item-key="items.id"
 class="elevation-1"
 >
 <template slot="items" slot-scope="props">
@@ -136,13 +138,27 @@ temporary
 </v-list>
 </v-navigation-drawer>
 
+<v-snackbar
+v-model="snackbar"
+:timeout="timeout"
+:top="true"
+>
+{{ successMessage }}
+<v-btn
+  color="primary"
+  flat
+  @click="snackbar = false"
+>
+  Close
+</v-btn>
+</v-snackbar>
+
 </v-app>
 
 
 
 </template>
 <script>
-import toastr from 'toastr';
 import { mapActions } from 'vuex';
 
 export default {
@@ -177,6 +193,7 @@ export default {
 				  sortable: false
 			  }
 		  ],
+		  pagination: {sortBy: 'lastName', descending: false},
 		  editedIndex: -1,
 	      contact: {
 	        firstName: '',
@@ -196,7 +213,10 @@ export default {
 		    items: [
 		      { title: 'Home', icon: 'dashboard' },
 		      { title: 'About', icon: 'question_answer' }
-		    ]
+		    ],
+		  snackbar: false,
+		  timeout: 6000,
+		  successMessage: ''
 	  }
   },
   computed: {
@@ -218,11 +238,11 @@ export default {
 		  if(this.editedIndex === -1) {
 			  console.log(this.contact);
 			  this.$store.dispatch('addContactEntity', this.contact);
-			  toastr.success('Contact added');
+			  this.showSuccessAlert('Contact added');
 		  } else {
 			  console.log(this.contact);
 			  this.$store.dispatch('updateContactEntity', this.contact);
-			  toastr.success('Contact updated');
+			  this.showSuccessAlert('Contact updated');
 		  }
 		  this.closeEdit();
 	  },
@@ -233,7 +253,7 @@ export default {
 	  },
 	  deleteContact: function(id) {
 		  this.deleteContactEntity(id);
-		  toastr.success('Contact deleted');
+		  this.showSuccessAlert('Contact deleted');
 	  },
 	  search: function() {
 		  this.$store.dispatch('searchContactEntities', this.contact);
@@ -247,6 +267,10 @@ export default {
 	  clearSearch: function() {
 		  this.getContactEntities();
 		  this.searchDialog = false;
+	  },
+	  showSuccessAlert: function(message) {
+		  this.successMessage = message;
+		  this.snackbar = true;
 	  }
   },
   created: function () {
