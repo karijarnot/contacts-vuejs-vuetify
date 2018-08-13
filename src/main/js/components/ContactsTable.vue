@@ -142,10 +142,11 @@ temporary
 v-model="snackbar"
 :timeout="timeout"
 :top="true"
+color="green"
 >
 {{ successMessage }}
 <v-btn
-  color="primary"
+  color="white"
   flat
   @click="snackbar = false"
 >
